@@ -1,16 +1,12 @@
 import pandas as pd
-import numpy as np
-import os
 import matplotlib.pyplot as plt
 from scipy.stats.stats import pearsonr
+from datetime import date
+from helpFunctions import readData
 
 building = '740-NTH' #'761-KMH' #'882-WBW'
-data = building + '_elektriciteit_withWeather_clean.csv'
-path = os.path.dirname( __file__ )
-path = os.path.abspath(os.path.join(path, os.pardir))
-df = pd.read_csv(os.path.join(path, 'datasets/' + data).replace('\\', '/'))
+df = readData(building, '_elektriciteit_withWeather_clean.csv')
 
-from datetime import date
 df['Momentum'] = df['Momentum'].astype('datetime64')
 df = df.set_index('Momentum', drop=False)
 
